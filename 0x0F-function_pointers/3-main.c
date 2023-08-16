@@ -6,7 +6,7 @@
  * main- Func prints operations results
  * @argc: no. of arguments given tp program.
  * @argv: array of pointers 
- * Return: Always (0).
+ * Return: Always 0
  */
 int main(int __attribute__((__unused__)) argc, char *argv[])
 {
@@ -35,8 +35,8 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 		printf("Error\n");
 		exit(100);
 	}
+
 	printf("%d\n", get_op_func(op)(num1, num2));
 
 	return (0);
 }
-
