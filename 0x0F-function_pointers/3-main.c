@@ -1,12 +1,16 @@
+#include <stdlib.h>
 #include <stdio.h>
+#include "function_pointers.h"
 #include "3-calc.h"
 #include "function_pointers.h"
 #include <stdlib.h>
+#include <stdio.h>
+#include "3-calc.h"
 /**
- * main- Func prints operations results
- * @argc: no. of arguments given tp program.
- * @argv: array of pointers 
- * Return: Always 0
+ * main - Prints result of simple operations.
+ * @argc: number of arguments given program
+ * @argv: Array of pointers to the arguments.
+ * Return: Always 0.
  */
 int main(int __attribute__((__unused__)) argc, char *argv[])
 {
