@@ -1,83 +1,39 @@
-#include <stdio.h>
 #include "lists.h"
-size_t looped_listint_len(const listint_t *head);
-size_t print_listint_safe(const listint_t *head);
-/**
- * looped_listint_len - Funct counting no. of unique nodes.
- * @head: Points to head of a listint_t to check.
- * Return: If a list is not looped - 0.
- * Otherwise - no. of unique nodes in a list.
- */
-size_t looped_listint_len(const listint_t *head)
-{
-	const listint_t *tortoise, *hare;
-	size_t nodes = 1;
 
-	if (head == NULL || head->next == NULL)
+/**
+ * free_listint_safe - freeing linked list.
+ * @h: Points to a first node in linked list.
+ * Return: No.of elements in  freed list.
+ */
+size_t free_listint_safe(listint_t **h)
+{
+	size_t len = 0;
+	int diff;
+	listint_t *temp;
+
+	if (!h || !*h)
 		return (0);
 
-	tortoise = head->next;
-	hare = (head->next)->next;
-
-	while (hare)
+	while (*h)
 	{
-		if (tortoise == hare)
+		diff = *h - (*h)->next;
+		if (diff > 0)
 		{
-			tortoise = head;
-			while (tortoise != hare)
-			{
-				nodes++;
-				tortoise = tortoise->next;
-				hare = hare->next;
-			}
-
-			tortoise = tortoise->next;
-			while (tortoise != hare)
-			{
-				nodes++;
-				tortoise = tortoise->next;
-			}
-
-			return (nodes);
+			temp = (*h)->next;
+			free(*h);
+			*h = temp;
+			len++;
 		}
-
-		tortoise = tortoise->next;
-		hare = (hare->next)->next;
-	}
-
-	return (0);
-}
-
-/**
- * print_listint_safe - Prints listint_t list safely.
- * @head: Points to a head of a list.
- * Return: No. of nodes in a list.
- */
-size_t print_listint_safe(const listint_t *head)
-{
-	size_t nodes, index = 0;
-
-	nodes = looped_listint_len(head);
-
-	if (nodes == 0)
-	{
-		for (; head != NULL; nodes++)
+		else
 		{
-			printf("[%p] %d\n", (void *)head, head->n);
-			head = head->next;
+			free(*h);
+			*h = NULL;
+			len++;
+			break;
 		}
 	}
 
-	else
-	{
-		for (index = 0; index < nodes; index++)
-		{
-			printf("[%p] %d\n", (void *)head, head->n);
-			head = head->next;
-		}
+	*h = NULL;
 
-		printf("-> [%p] %d\n", (void *)head, head->n);
-	}
-
-	return (nodes);
+	return (len);
 }
