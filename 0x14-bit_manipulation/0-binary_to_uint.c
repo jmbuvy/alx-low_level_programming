@@ -1,12 +1,24 @@
-#include <unistd.h>
 #include "main.h"
+
 /**
- * _putchar - funct that is writing char c to stdout.
- * @c: The Char.
- * Return: 1 on success.
- * Else, return -1.
+ * binary_to_uint - funct converting binaryno to unsigned integer
+ * @b: The binary string
+ * Return: Converted no.
  */
-int _putchar(char c)
+unsigned int binary_to_uint(const char *b)
 {
-	return (write(1, &c, 1));
+	int i;
+	unsigned int dec_val = 0;
+
+	if (!b)
+		return (0);
+
+	for (i = 0; b[i]; i++)
+	{
+		if (b[i] < '0' || b[i] > '1')
+			return (0);
+		dec_val = 2 * dec_val + (b[i] - '0');
+	}
+
+	return (dec_val);
 }
