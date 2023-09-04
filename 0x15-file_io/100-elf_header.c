@@ -2,9 +2,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
+
 void check_elf(unsigned char *e_ident);
 void print_magic(unsigned char *e_ident);
 void print_class(unsigned char *e_ident);
@@ -15,6 +16,7 @@ void print_osabi(unsigned char *e_ident);
 void print_type(unsigned int e_type, unsigned char *e_ident);
 void print_entry(unsigned long int e_entry, unsigned char *e_ident);
 void close_elf(int elf);
+
 /**
  * check_elf - Checks for an ELF file.
  * @e_ident: Points an array having the ELF magic nos.
@@ -36,6 +38,7 @@ void check_elf(unsigned char *e_ident)
 		}
 	}
 }
+
 /**
  * print_magic - Func printing magic no. of an ELF header.
  * @e_ident:Points an array having the ELF magic nos.
@@ -57,6 +60,7 @@ void print_magic(unsigned char *e_ident)
 			printf(" ");
 	}
 }
+
 /**
  * print_class - Printing a class of ELF header.
  * @e_ident: Points an array having the ELF class.
@@ -80,6 +84,7 @@ void print_class(unsigned char *e_ident)
 		printf("<unknown: %x>\n", e_ident[EI_CLASS]);
 	}
 }
+
 /**
  * print_data - Printing data of ELF header.
  * @e_ident: points array having ELF class.
@@ -103,6 +108,7 @@ void print_data(unsigned char *e_ident)
 		printf("<unknown: %x>\n", e_ident[EI_CLASS]);
 	}
 }
+
 **
  *  print_version - Printing version of an ELF header.
  *  @e_ident: Points an array having ELF version.
@@ -122,6 +128,7 @@ void print_data(unsigned char *e_ident)
 		break;
 	}
 }
+
 /**
  * print_osabi - Printing OS/ABI of ELF header.
  * @e_ident: Pointing an array having ELF version.
@@ -166,6 +173,7 @@ void print_osabi(unsigned char *e_ident)
 		printf("<unknown: %x>\n", e_ident[EI_OSABI]);
 	}
 }
+
 /**
  * print_abi - Printing ABI version of ELF header.
  * @e_ident: Points an array having the ELF ABI version.
@@ -209,6 +217,7 @@ void print_type(unsigned int e_type, unsigned char *e_ident)
 		printf("<unknown: %x>\n", e_type);
 	}
 }
+
 /**
  * print_entry - Printing entry point of ELF header.
  * @e_entry: The address.
@@ -231,6 +240,7 @@ void print_entry(unsigned long int e_entry, unsigned char *e_ident)
 	else
 		printf("%#lx\n", e_entry);
 }
+
 /**
  * close_elf - Closing ELF file.
  * @elf:file desdcriptor of ELF file.
@@ -245,6 +255,7 @@ void close_elf(int elf)
 		exit(98);
 	}
 }
+
 /**
  * main - Displaying info contained in ELF file.
   * @argc: no.of arguments in the  program.
@@ -294,3 +305,4 @@ int main(int __attribute__((__unused__)) argc, char *argv[])
 	free(header);
 	close_elf(o);
 	return (0);
+}
